@@ -1,0 +1,45 @@
+import React from 'react';
+//material-ui 이용
+import CssBaseLine from '@material-ui/core/CssBaseline'
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
+import Input from '@material-ui/core/Input';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
+import ReactCSSTranstionGroup from 'react-addons-css-transition-group';
+import './TodoApp.css'; //애니메이션 효과를 주는 css
+
+export default function TodoApp({task, tasks, inputTask, addTask, resetTask}) {
+    return (
+        <div>
+            <CssBaseLine />
+            <AppBar position="static">
+                <Toolbar>
+                    <Typography variant="title" color="inherit">
+                        To-do List
+                    </Typography>
+                </Toolbar>
+            </AppBar>
+            <div style={{padding: '16px'}}>
+                <Input type="text" onChange={(e) => inputTask(e.target.value)} />
+                <Button variant="contained" color="secondary" onClick={() => addTask(task)}>add</Button>
+                <List>
+                    <ReactCSSTranstionGroup transitionName="example" transitionEnterTimeout={300}>
+                        {
+                            tasks.map(function(item, i) {
+                                return (
+                                    <ListItem key={i}>
+                                        <ListItemText primary={'- ' + item} />
+                                    </ListItem>
+                                );
+                            })
+                        }
+                    </ReactCSSTranstionGroup>
+                </List>
+            </div>
+        </div>
+    );
+}
